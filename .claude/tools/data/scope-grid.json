@@ -405,5 +405,42 @@
       "performance-validation": "EXECUTE",
       "feedback-optimization": "EXECUTE"
     }
+  },
+  "spec-review": {
+    "stages": {
+      "workspace-scaffold": "EXECUTE",
+      "workspace-detection": "EXECUTE",
+      "state-init": "EXECUTE",
+      "intent-capture": "EXECUTE",
+      "market-research": "SKIP",
+      "feasibility": "SKIP",
+      "scope-definition": "EXECUTE",
+      "team-formation": "SKIP",
+      "rough-mockups": "SKIP",
+      "approval-handoff": "SKIP",
+      "reverse-engineering": "SKIP",
+      "practices-discovery": "EXECUTE",
+      "requirements-analysis": "EXECUTE",
+      "user-stories": "SKIP",
+      "refined-mockups": "SKIP",
+      "domain-design": "SKIP",
+      "units-generation": "SKIP",
+      "contract-design": "SKIP",
+      "delivery-planning": "SKIP",
+      "functional-design": "SKIP",
+      "nfr-requirements": "EXECUTE",
+      "nfr-design": "EXECUTE",
+      "infrastructure-design": "SKIP",
+      "code-generation": "EXECUTE",
+      "build-and-test": "EXECUTE",
+      "ci-pipeline": "EXECUTE",
+      "deployment-pipeline": "SKIP",
+      "environment-provisioning": "SKIP",
+      "deployment-execution": "SKIP",
+      "observability-setup": "EXECUTE",
+      "incident-response": "SKIP",
+      "performance-validation": "EXECUTE",
+      "feedback-optimization": "SKIP"
+    }
   }
 }

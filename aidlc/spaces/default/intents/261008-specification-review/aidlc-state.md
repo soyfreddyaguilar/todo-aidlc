@@ -7,7 +7,7 @@
 - **Scope**: spec-review
 - **Start Date**: 2026-10-08T21:29:37Z
 - **State Version**: 8
-- **Active Agent**: aidlc-product-agent
+- **Active Agent**: aidlc-pipeline-deploy-agent
 - **Worktree Path**:
 - **Bolt Refs**:
 - **Practices Affirmed Timestamp**:
@@ -31,24 +31,26 @@
 
 ## Execution Plan Summary
 - **Total Stages**: 14
-- **Completed**: 3
-- **In Progress**: intent-capture
+- **Completed**: 5
+- **In Progress**: practices-discovery
 
 ## Runtime State
-- **Revision Count**: 1
+- **Revision Count**: 2
 
 
 
-- **Parked**: 2026-10-08T23:11:16Z
 
-- **Parked At Stage**: intent-capture
+
+- **Parked**: 2026-10-08T23:44:54Z
+
+- **Parked At Stage**: practices-discovery
 
 ## Phase Progress
 <!-- Status values: Pending, Active, Verified, Skipped -->
 
 - **Initialization**: Verified
-- **Ideation**: Active
-- **Inception**: Pending
+- **Ideation**: Verified
+- **Inception**: Active
 - **Construction**: Pending
 - **Operation**: Pending
 
@@ -61,17 +63,17 @@
 - [x] state-init — EXECUTE
 
 ### IDEATION PHASE
-- [-] intent-capture — EXECUTE
+- [x] intent-capture — EXECUTE
 - [ ] market-research — SKIP
 - [ ] feasibility — SKIP
-- [ ] scope-definition — EXECUTE
+- [x] scope-definition — EXECUTE
 - [ ] team-formation — SKIP
 - [ ] rough-mockups — SKIP
 - [ ] approval-handoff — SKIP
 
 ### INCEPTION PHASE
 - [ ] reverse-engineering — SKIP
-- [ ] practices-discovery — EXECUTE
+- [-] practices-discovery — EXECUTE
 - [ ] requirements-analysis — EXECUTE
 - [ ] user-stories — SKIP
 - [ ] refined-mockups — SKIP
@@ -100,13 +102,13 @@ Per unit: [TBD]
 - [ ] feedback-optimization — SKIP
 
 ## Current Status
-- **Lifecycle Phase**: IDEATION
-- **Current Stage**: intent-capture
-- **Next Stage**: scope-definition
+- **Lifecycle Phase**: INCEPTION
+- **Current Stage**: practices-discovery
+- **Next Stage**: requirements-analysis
 - **Status**: Running
-- **Last Updated**: 2026-10-08T23:11:16Z
+- **Last Updated**: 2026-10-08T23:44:54Z
 
 ## Session Resume Point
-- **Last Completed Stage**: state-init
-- **Next Action**: Execute Intent Capture & Framing
+- **Last Completed Stage**: scope-definition
+- **Next Action**: Execute Practices Discovery
 - **Pending Artifacts**: none

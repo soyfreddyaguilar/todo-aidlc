@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "distribution": "claude",
+  "productName": "Claude Code",
+  "configNextStep": "open Claude Code in this project and run `/aidlc --doctor`",
+  "name": "claude",
+  "harnessDir": ".claude",
+  "rulesSubdir": "rules",
+  "project": {
+    "schemaVersion": 1,
+    "mcp": "defaults",
+    "completions": "none"
+  },
+  "providers": {
+    "schemaVersion": 1,
+    "provider": "current"
+  }
+}

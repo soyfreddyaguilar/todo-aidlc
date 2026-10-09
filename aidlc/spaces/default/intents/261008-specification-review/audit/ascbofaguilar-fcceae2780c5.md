@@ -3536,3 +3536,132 @@
 **Session**: 1c21748d-b846-4610-bb6b-07b96f7f4d60
 
 ---
+
+## Workflow Parked
+**Timestamp**: 2026-10-09T03:40:56Z
+**Event**: WORKFLOW_PARKED
+**Stage**: practices-discovery
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-10-09T03:41:23Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: 
+**Agent ID**: a5a0a79
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:41:32Z
+**Event**: HUMAN_TURN
+**Session**: 1c21748d-b846-4610-bb6b-07b96f7f4d60
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:42:08Z
+**Event**: HUMAN_TURN
+**Session**: 1c21748d-b846-4610-bb6b-07b96f7f4d60
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:43:28Z
+**Event**: HUMAN_TURN
+**Session**: 1c21748d-b846-4610-bb6b-07b96f7f4d60
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:44:06Z
+**Event**: HUMAN_TURN
+**Session**: e5d34cc5-5e5c-4de7-87e1-57fffdbe1c85
+
+---
+
+## Workflow Unparked
+**Timestamp**: 2026-10-09T03:44:29Z
+**Event**: WORKFLOW_UNPARKED
+
+---
+
+## Practices Affirmed
+**Timestamp**: 2026-10-09T03:44:48Z
+**Event**: PRACTICES_AFFIRMED
+**Affirming User**: unknown
+**Sections Written**: Way of Working, Walking Skeleton, Testing Posture, Deployment, Code Style
+**Mandated Rules Appended**: 0
+**Forbidden Rules Appended**: 0
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:45:08Z
+**Event**: HUMAN_TURN
+**Session**: e5d34cc5-5e5c-4de7-87e1-57fffdbe1c85
+
+---
+
+## Error Logged
+**Timestamp**: 2026-10-09T03:45:19Z
+**Event**: ERROR_LOGGED
+**Tool**: aidlc-state
+**Command**: aidlc-state engine state reject practices-discovery --feedback=Finalize affirmed practices and advance --user-input Request Changes --project-dir <project-dir>
+**Error**: Refusing to reject "practices-discovery": the recovery-question choice was not Request Changes. Carry out that action, or re-present the recovery question and wait for the human to choose Request Changes.
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:45:48Z
+**Event**: HUMAN_TURN
+**Session**: 1c21748d-b846-4610-bb6b-07b96f7f4d60
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:46:14Z
+**Event**: HUMAN_TURN
+**Session**: e5d34cc5-5e5c-4de7-87e1-57fffdbe1c85
+
+---
+
+## Error Logged
+**Timestamp**: 2026-10-09T03:46:28Z
+**Event**: ERROR_LOGGED
+**Tool**: aidlc-state
+**Command**: aidlc-state engine state reject practices-discovery --feedback=Finalize affirmed practices and advance to Requirements Analysis --user-input Request Changes --project-dir <project-dir>
+**Error**: Refusing to reject "practices-discovery": the guard-recovery choice is not revision feedback. Ask "What should change?", end the turn, and wait for the human's separate response before retrying.
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:46:44Z
+**Event**: HUMAN_TURN
+**Session**: e5d34cc5-5e5c-4de7-87e1-57fffdbe1c85
+
+---
+
+## Gate Rejected
+**Timestamp**: 2026-10-09T03:46:55Z
+**Event**: GATE_REJECTED
+**Stage**: practices-discovery
+**Feedback**: Nothing - practices are finalized
+
+---
+
+## Stage Revising
+**Timestamp**: 2026-10-09T03:46:55Z
+**Event**: STAGE_REVISING
+**Stage**: practices-discovery
+**Revision count**: 5
+**Feedback**: Nothing - practices are finalized
+
+---
+
+## Human Turn
+**Timestamp**: 2026-10-09T03:47:51Z
+**Event**: HUMAN_TURN
+**Session**: 1c21748d-b846-4610-bb6b-07b96f7f4d60
+
+---

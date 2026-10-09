@@ -41,7 +41,7 @@ Affirmed: 2026-10-08, Practices Discovery stage
 
 ## Testing Posture
 
-- **Methodology:** BDD (behavior-driven development; scenario-driven testing)
+- **Methodology:** bdd
 - **Ordering:** Write scenarios from acceptance criteria first, then implement features to satisfy those scenarios.
 - **Coverage Floor:** 40% line coverage (aligned with spec-review scope; no extra floor beyond org defaults)
 - **Scenario Mapping:** 10 acceptance criteria map directly to test scenarios; each scenario validates one acceptance criterion

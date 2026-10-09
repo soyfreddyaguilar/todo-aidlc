@@ -7,7 +7,7 @@
 - **Scope**: spec-review
 - **Start Date**: 2026-10-08T21:29:37Z
 - **State Version**: 8
-- **Active Agent**: aidlc-architect-agent
+- **Active Agent**: aidlc-developer-agent
 - **Worktree Path**:
 - **Bolt Refs**:
 - **Practices Affirmed Timestamp**: 2026-10-09T04:17:13Z
@@ -18,7 +18,7 @@
 - **Depth**: Standard
 - **Test Strategy**: Standard
 - **Review Override**: 
-- **Guard Policy**: relaxed (from scope spec-review)
+- **Guard Policy**: off (set by you)
 - **Sensors**: on (from scope spec-review)
 - **Learnings**: on (from scope spec-review)
 - **Summary Confirmation**: on (from scope spec-review)
@@ -32,7 +32,7 @@
 ## Execution Plan Summary
 - **Total Stages**: 14
 - **Completed**: 6
-- **In Progress**: nfr-requirements
+- **In Progress**: code-generation
 
 ## Runtime State
 - **Revision Count**: 5
@@ -97,10 +97,10 @@
 ### CONSTRUCTION PHASE
 Per unit: [TBD]
 - [ ] functional-design — SKIP
-- [-] nfr-requirements — EXECUTE
-- [ ] nfr-design — EXECUTE
+- [S] nfr-requirements — EXECUTE
+- [S] nfr-design — EXECUTE
 - [ ] infrastructure-design — SKIP
-- [ ] code-generation — EXECUTE
+- [-] code-generation — EXECUTE
 - [ ] build-and-test — EXECUTE
 - [ ] ci-pipeline — EXECUTE
 
@@ -115,12 +115,12 @@ Per unit: [TBD]
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: nfr-requirements
-- **Next Stage**: nfr-design
+- **Current Stage**: code-generation
+- **Next Stage**: build-and-test
 - **Status**: Running
-- **Last Updated**: 2026-10-09T13:33:42Z
+- **Last Updated**: 2026-10-09T15:08:46Z
 
 ## Session Resume Point
 - **Last Completed Stage**: practices-discovery
-- **Next Action**: Execute NFR Requirements
+- **Next Action**: Execute Code Generation
 - **Pending Artifacts**: none

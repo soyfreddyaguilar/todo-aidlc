@@ -10,7 +10,7 @@ This document explains the reasoning behind each affirmed practice and traces th
 
 ### Context
 
-The project is a learning/POC for a TODO app specification review. The team is small (1–2 developers) and work is expected to be incremental with frequent integration.
+The project is a learning/POC for a TODO app specification review. The team is small and work is expected to be incremental with frequent integration.
 
 ### Decision
 
@@ -18,15 +18,15 @@ Affirm **trunk-based development** with squash-merge to `main`.
 
 ### Reasoning
 
-1. **Org-Level Default:** `org.md` already specifies trunk-based development, short-lived feature branches, and squash-merge pattern. We are not deviating; we are affirming alignment.
-2. **Scope Fit:** POC/learning scope suits short-lived branches. We expect to iterate quickly, and merging frequently keeps the main branch always deployable.
-3. **Auditability:** Squash-merge preserves a clean `main` history (1:1 with Bolts) while the event log captures the full commit history. This balances readability with auditability.
-4. **No Long-Lived Branches:** We avoid release branches, staging branches, or develop branches. Instead, we use tags and environment configs to gate production deploys.
+1. **Org-Level Default:** `org.md` specifies trunk-based development with short-lived feature branches (< 2 days) and squash-merge pattern.
+2. **Scope Fit:** POC/learning scope suits short-lived branches for frequent integration.
+3. **Auditability:** Squash-merge preserves clean `main` history (1:1 with Bolts) while event log captures full commit history.
+4. **No Long-Lived Branches:** Avoid release/staging/develop branches; use tags and environment configs for gating.
 
 ### Traceability
 
-- Org default: `org.md` § Way of Working (affirmed in framework)
-- Scope: `261008-specification-review` (POC scope → short iteration cycles)
+- Org default: `org.md` § Way of Working
+- Scope: `spec-review` (POC scope → short iteration cycles)
 
 ---
 
@@ -34,7 +34,7 @@ Affirm **trunk-based development** with squash-merge to `main`.
 
 ### Context
 
-The specification describes a TODO app. The team wants to build iteratively and verify working software early. The skeleton strategy is enabled for this project (`skeleton: on`).
+The specification describes a TODO app. Team wants to build iteratively and verify working software early. Skeleton strategy enabled (`skeleton: on`).
 
 ### Decision
 
@@ -42,73 +42,72 @@ Affirm a **walking skeleton** of Add/Edit/Delete/View tasks with localStorage pe
 
 ### Reasoning
 
-1. **Org-Level Default:** `org.md` § Walking Skeleton requires that when `skeleton: on`, we identify the smallest working integrated slice and verify it before later Units/features.
-2. **V1 Scope:** The skeleton covers the absolute minimum for a TODO app: add, view, edit, delete, and persistence. It excludes filtering, search, and styling as secondary features.
-3. **Verification:** The skeleton is verified by a recorded, human-authorized Construction Verification Command: "Launch app → add task → refresh → confirm persistence → edit → delete → confirm changes persist."
-4. **Checkpoint Approval:** After skeleton is verified, the human approves it at a checkpoint before iterating on secondary features (filtering, dark mode, etc.).
-5. **Separation of Concerns:** This skeleton tests the core domain logic (task CRUD) independently of styling and secondary features, reducing integration risk.
+1. **Org-Level Default:** `org.md` requires smallest working integrated slice when `skeleton: on`.
+2. **V1 Scope:** Covers absolute minimum: add, view, edit, delete, persistence. Excludes filtering, search, styling.
+3. **Verification:** Human-authorized command: "Launch app → add task → refresh → confirm persistence → edit → delete → confirm changes persist."
+4. **Checkpoint Approval:** Human approves skeleton before iterating on secondary features.
+5. **Risk Reduction:** Core domain logic (CRUD) tested independently of styling and secondary features.
 
 ### Traceability
 
 - Org default: `org.md` § Walking Skeleton
-- Scope: `261008-specification-review` (POC scope → early verification desired)
+- Scope: `spec-review` (POC scope → early verification)
 - Specification: TODO app with add/edit/delete/view
 
 ---
 
-## Testing Posture — Test-After with 70% Coverage
+## Testing Posture — BDD with 40% Coverage
 
 ### Context
 
-The scope is `poc` (proof of concept). The org default for POC is "no extra new-test floor; existing suite remains green." However, since we are building from scratch, we are defining a floor for this project.
+Scope is `spec-review`. Org default for spec-review is "no extra new-test floor." Quality specialist identified that original proposal (70% test-after) contradicted org defaults and misaligned with learning objectives.
 
 ### Decision
 
-Affirm **test-after methodology** with **70% line coverage floor** and **per-layer testing**.
+Affirm **BDD (behavior-driven development)** with **40% line coverage floor**, mapped to 10 acceptance criteria.
 
 ### Reasoning
 
-1. **Org-Level Default:** `org.md` § Testing Posture says POC scope has "no extra new-test floor" by default. We are defining a stricter posture locally because:
-   - We are building a learning project; tests serve as executable documentation.
-   - 70% is a realistic floor for a POC (pragmatic, not burdensome).
-   - It's lower than enterprise (80%) because the scope is exploratory.
-
-2. **Test-After Methodology:** We implement the feature (component, utility, CRUD flow), then write and run tests. This is appropriate for a POC where the design is evolving.
-3. **Per-Layer Ordering:** We implement a layer (e.g., Task component), then test that layer (unit tests), before moving to the next layer (persistence, search). This reduces debugging complexity.
-4. **CI Gating:** Tests run on PRs and merge commits. Failure blocks merge. This prevents untested code from reaching `main`.
-5. **Coverage Measurement:** We measure line coverage; branching coverage is a stretch goal.
+1. **Org-Level Default:** `org.md` § Testing Posture says spec-review adds "no extra new-test floor beyond org defaults." Option C aligns with this.
+2. **Methodology:** BDD (scenario-first) better validates specifications than test-after. Scenarios document requirements while validating them.
+3. **Coverage Floor:** 40% is pragmatic for learning project; aligns with spec-review scope defaults.
+4. **Scenario Mapping:** 10 acceptance criteria map to BDD scenarios (1:1). Each scenario validates one criterion.
+5. **CI Gating:** Tests run on PRs and merge commits. Test failure blocks merge to `main`.
+6. **Test Scope:** Feature scenarios (Gherkin format) for 10 ACs; unit tests for utilities/components; integration tests for localStorage.
 
 ### Traceability
 
-- Org default: `org.md` § Testing Posture (POC: no extra floor, but affirming 70% locally)
-- Scope: `poc` → learning/exploratory
-- Quality: Test layer-by-layer to catch integration errors early
+- Org default: `org.md` § Testing Posture (spec-review scope + no extra floor)
+- Quality specialist feedback: Option C recommended for specification validation
+- Scope: `spec-review` → learning/documentation value > test burden
 
 ---
 
-## Code Style — Prettier + ESLint
+## Code Style — Prettier + ESLint with React Specialization
 
 ### Context
 
-The project is a React/JavaScript TODO app. The org default defers to project-level configs.
+Project is React/JavaScript TODO app. Org default defers to project-level configs and language idiom.
 
 ### Decision
 
-Affirm **Prettier** (formatter) and **ESLint** (linter) with React plugin, camelCase naming.
+Affirm **Prettier** (formatter) and **ESLint** (linter) with React plugin, PascalCase component naming, camelCase variables.
 
 ### Reasoning
 
-1. **Org-Level Default:** `org.md` § Code Style says "defer to project-level configurations; formatter, linter, and naming conventions are language idiomatic." We are affirming the JavaScript/React defaults.
-2. **Prettier:** Industry standard for JS/TS formatting. Zero-config approach (default settings) reduces bikeshedding.
-3. **ESLint + React:** Catches common mistakes (missing dependencies, incorrect hook usage, etc.). React plugin is essential for this scope.
-4. **camelCase:** JavaScript/TypeScript idiomatic naming (functions, variables, imports). No custom renaming rules.
-5. **CI Enforcement:** Linting and formatting are checked in CI; failures block merge. This ensures consistency.
-6. **Error Handling:** Async operations include try/catch or .catch(); errors are logged in development and reported to an error boundary in production.
+1. **Org-Level Default:** `org.md` § Code Style defers to language idiomatic conventions.
+2. **Prettier:** Industry standard for JS/TS; zero-config defaults reduce bikeshedding.
+3. **ESLint + React:** Catches common mistakes; React plugin essential for hooks/component rules.
+4. **Component Naming:** PascalCase for React components (TaskList, TaskForm); camelCase for variables/functions/imports.
+5. **File Organization:** Feature-based structure (`src/features/<feature>/components`, `src/shared/utils`) supports BDD scenario mapping.
+6. **Error Handling:** Async operations include try/catch or .catch(); localStorage validates/handles parse errors.
+7. **CI Enforcement:** Linting and formatting checked in CI; failures block merge.
 
 ### Traceability
 
 - Org default: `org.md` § Code Style (language idiomatic)
-- Tech stack: React/JavaScript (POC learning scope)
+- Developer specialist feedback: All refinements affirmed (PascalCase, hooks enforcement, feature-based structure)
+- Tech stack: React/JavaScript/TypeScript
 
 ---
 
@@ -116,7 +115,7 @@ Affirm **Prettier** (formatter) and **ESLint** (linter) with React plugin, camel
 
 ### Context
 
-The org default specifies "deploy on merge to staging environments" with "manual approval for production."
+Org default specifies "deploy on merge to staging" with "manual approval for production."
 
 ### Decision
 
@@ -124,47 +123,52 @@ Affirm **automatic deployment to staging** on merge to `main`, with **manual app
 
 ### Reasoning
 
-1. **Org-Level Default:** `org.md` § Deployment already specifies this pattern. We are affirming it.
-2. **Staging Auto-Deploy:** After CI passes (linting, tests, build), the app auto-deploys to staging. This gives fast feedback without human ceremony.
-3. **Production Manual Gate:** A tech lead must approve before production deployment. For a POC, this is tech lead approval only (not a full change advisory board).
-4. **Smoke Tests:** Post-deploy health checks confirm the app loads, basic CRUD works, and localStorage syncs. If they fail, deployment is rolled back.
-5. **Rollback Procedure:** If health checks fail, we revert the commit, redeploy, and verify. This is documented in a runbook.
-6. **Strategy:** Simple rolling restart for POC phase (single instance or small cluster). Upgrade to blue-green or canary if we scale.
+1. **Org-Level Default:** `org.md` § Deployment specifies this pattern already.
+2. **Staging Auto-Deploy:** After CI passes (linting, tests, build), app auto-deploys to staging for fast feedback.
+3. **Production Manual Gate:** Tech lead approval required before production deployment (POC phase).
+4. **Smoke Tests:** Post-deploy health checks confirm app loads, basic CRUD works, localStorage syncs.
+5. **Rollback:** Automated rollback if health checks fail; manual procedure documented (revert commit, redeploy, verify).
+6. **Strategy:** Simple rolling restart for POC phase; upgrade to blue-green or canary if multi-instance.
+7. **Phase 2 Deferral:** Security enhancements (secrets management, localStorage validation, npm scanning) deferred to Phase 2.
 
 ### Traceability
 
 - Org default: `org.md` § Deployment
-- Scope: `poc` (small, learning-friendly deployment ceremony)
-- Safety: Smoke tests + manual production gate
+- Scope: `spec-review` (POC phase → simple deployment ceremony)
+- DevSecOps specialist feedback: Security refinements deferred to Phase 2
 
 ---
 
 ## Deviations from Org Defaults
 
-**None.** All affirmed practices align with or specialize the org-level defaults. No contradictions.
+**None.** All affirmed practices align with or specialize org-level defaults. No contradictions detected.
 
 ---
 
-## Open Questions Resolved
+## Learnings & Specialist Inputs
 
-1. **Coverage floor for POC?** Affirmed 70% (lower than enterprise 80%, pragmatic for learning).
-2. **Formatter/Linter?** Affirmed Prettier + ESLint (industry standard for React/JS).
-3. **Manual or automatic production deploy?** Affirmed manual gate (tech lead sign-off).
-4. **Skeleton first or feature-major?** Affirmed skeleton-first (org default for `skeleton: on`).
-5. **Test methodology?** Affirmed test-after (aligns with POC scope, appropriate for evolving design).
+### Quality Specialist Review
+- **Finding:** Original 70% coverage floor contradicted org defaults for spec-review scope.
+- **Recommendation:** Option C (BDD + 40% coverage) better aligns with specification validation and learning objectives.
+- **Status:** Affirmed 2026-10-09.
+
+### Developer Specialist Review
+- **Findings:** Identified gaps in component naming clarity, hooks enforcement, file organization guidance.
+- **Enhancements:** PascalCase components, ESLint react-hooks plugin, feature-based structure, localStorage validation.
+- **Status:** All refinements affirmed 2026-10-09.
+
+### DevSecOps Specialist Review
+- **Findings:** Identified security gaps (secrets management, localStorage data integrity, npm vulnerability scanning, health check formalization).
+- **Resolution:** Affirmed deferral of security enhancements to Phase 2 as appropriate for POC phase.
+- **Status:** Affirmed 2026-10-09.
 
 ---
 
-## Specialist Review Inputs
+## Decision Timeline
 
-- **Quality Agent:** Validates 70% coverage floor and test-after methodology against scope.
-- **Developer Agent:** Validates Prettier + ESLint configuration and project setup.
-- **DevSecOps Agent:** Validates deployment gating and smoke test strategy.
-
-(Inputs will be recorded below as specialists review.)
-
----
-
-## Decision Log
-
-- **2026-10-08, 19:45 UTC:** Team practices proposed and approved by human. Proceeding to specialist review.
+- **2026-10-08:** Team practices proposed with initial options (Way of Working, Walking Skeleton, Testing Posture, Deployment, Code Style).
+- **2026-10-08:** Quality specialist identified testing posture misalignment; proposed Option C (BDD + 40%).
+- **2026-10-08:** Developer and DevSecOps specialists reviewed and provided refinements.
+- **2026-10-08–2026-10-09:** Team affirmed practices across all five areas.
+- **2026-10-09:** Seven learnings recorded to project memory (interpretations, deviations, tradeoffs).
+- **2026-10-09:** Practices promoted to team.md with PRACTICES_AFFIRMED audit event.

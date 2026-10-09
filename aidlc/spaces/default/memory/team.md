@@ -34,7 +34,7 @@ For this specification-review project, the walking skeleton is:
 - Task filtering (completed, active, all)
 - Search/filter by title
 - Dark mode toggle
-- Enhanced styling (Tailwind or custom CSS)
+- Enhanced custom CSS styling
 - Due dates and priority levels
 
 Affirmed: 2026-10-08, Practices Discovery stage

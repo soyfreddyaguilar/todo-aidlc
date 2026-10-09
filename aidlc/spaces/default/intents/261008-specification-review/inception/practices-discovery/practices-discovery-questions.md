@@ -42,6 +42,15 @@ X. Unclear
 
 ---
 
+## Q2a: Walking Skeleton — Continued
+
+**Confirmed Decision (Session 2, 2026-10-09):** Yes, skeleton-first with CRUD + localStorage persistence.
+
+V1 Skeleton: add/view/edit/delete tasks with localStorage persistence.
+Secondary features (filtering, search, styling, dark mode) follow skeleton verification and approval.
+
+---
+
 ## Q3: Testing Posture — BDD + 40% Coverage
 
 **Question:** Does the team affirm BDD (behavior-driven development) with 40% coverage for specification validation?

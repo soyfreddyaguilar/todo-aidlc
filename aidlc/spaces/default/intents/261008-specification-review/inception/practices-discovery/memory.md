@@ -3,7 +3,7 @@
 
 ## Interpretations
 
-2026-10-08T21:00:00Z — POC scope justifies 70% coverage floor (higher than org default of none) because learning/documentation value outweighs additional test burden
+2026-10-08T21:00:00Z — Spec-review scope justifies 40% coverage floor (aligned with org defaults) with BDD methodology; specification-driven validation better serves learning/documentation objectives than test-after approach
 
 2026-10-08T21:00:00Z — Walking skeleton strategy affirmed for scope with `skeleton: on`; smallest integrated slice is CRUD + persistence, excluding secondary features
 
@@ -15,11 +15,11 @@ None. All affirmed practices align with or specialize org-level defaults. No con
 
 ## Tradeoffs
 
-2026-10-08T21:00:00Z — Chose test-after over TDD; exploratory scope and evolving design suit iteration-first approach
+2026-10-08T21:00:00Z — Chose BDD over test-after; specification-driven validation with scenario-first approach better aligns with learning objectives and acceptance criteria mapping
 
-2026-10-08T21:00:00Z — Chose Prettier + ESLint (zero-config standard) over custom linting rules; reduces bikeshedding
+2026-10-08T21:00:00Z — Chose Prettier + ESLint (zero-config standard) over custom linting rules; reduces bikeshedding and accelerates team onboarding
 
-2026-10-08T21:00:00Z — Chose skeleton-first over feature-major; early verification catches integration issues
+2026-10-08T21:00:00Z — Chose skeleton-first over feature-major; early verification catches integration issues before secondary features accumulate complexity
 
 ## Open questions
 

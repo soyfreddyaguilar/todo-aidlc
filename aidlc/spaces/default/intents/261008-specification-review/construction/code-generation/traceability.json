@@ -1,0 +1,144 @@
+{
+  "stage": "code-generation",
+  "unit": "todo-app",
+  "description": "Implementacion del TODO app (React 19 + Vite) en projects/todo-app",
+  "upstream_ids": ["FR1", "FR2", "FR3", "FR4", "FR5", "FR6", "FR7", "FR8", "FR9", "FR10", "NFR1", "NFR2", "NFR3", "NFR4", "NFR5", "NFR6", "NFR7", "NFR8", "NFR9", "NFR10"],
+  "coverage": [
+    {
+      "id": "FR1",
+      "name": "Create Tasks",
+      "status": "OK",
+      "target": "projects/todo-app/src/features/tasks/components/TaskForm.jsx",
+      "notes": "Escenario BDD 1 y 2 (tasks.feature.test.jsx); useTodos.addTask genera ID YYYYMMDDHHMMSSMMM y timestamps; persistencia sincrona en la misma accion"
+    },
+    {
+      "id": "FR2",
+      "name": "List Tasks",
+      "status": "OK",
+      "target": "projects/todo-app/src/features/tasks/components/TaskList.jsx",
+      "notes": "Escenarios BDD 3 y 4 (orden descendente y estado vacio); carga inicial en useTodos"
+    },
+    {
+      "id": "FR3",
+      "name": "Mark Tasks Complete/Incomplete",
+      "status": "OK",
+      "target": "projects/todo-app/src/features/tasks/components/TaskItem.jsx",
+      "notes": "Escenario BDD 5; contadores de filtro actualizados via countTasksByFilter"
+    },
+    {
+      "id": "FR4",
+      "name": "Filter Tasks by Status",
+      "status": "OK",
+      "target": "projects/todo-app/src/features/tasks/components/FilterButtons.jsx",
+      "notes": "Escenario BDD 6; filtros en src/shared/utils/taskFilters.js. La ausencia de errores en consola durante el filtrado no se verifica automaticamente (ver NFR9)"
+    },
+    {
+      "id": "FR5",
+      "name": "Delete Tasks",
+      "status": "OK",
+      "target": "projects/todo-app/src/features/tasks/components/TaskItem.jsx",
+      "notes": "Escenario BDD 7; integracion localStorage-integration.test.jsx (eliminacion desde almacenamiento)"
+    },
+    {
+      "id": "FR6",
+      "name": "Edit Tasks",
+      "status": "OK",
+      "target": "projects/todo-app/src/features/tasks/components/TaskItem.jsx",
+      "notes": "Escenario BDD 8 (Enter guarda) y prueba de integracion (guardar al perder foco); Escape cancela"
+    },
+    {
+      "id": "FR7",
+      "name": "Responsive Design",
+      "status": "PARTIAL",
+      "target": "projects/todo-app/src/App.css",
+      "notes": "Verificacion parcial: escenario BDD 9 valida estaticamente breakpoints 768px/1024px y 44px. No hay prueba de viewport real de 320px ni de desplazamiento horizontal; queda como brecha"
+    },
+    {
+      "id": "FR8",
+      "name": "Dark Mode",
+      "status": "OK",
+      "target": "projects/todo-app/src/shared/hooks/useTheme.js",
+      "notes": "Escenario BDD 10; preferencia en clave todos-app-theme; contraste WCAG AA no medido (ver NFR2)"
+    },
+    {
+      "id": "FR9",
+      "name": "Form Validation",
+      "status": "OK",
+      "target": "projects/todo-app/src/shared/utils/validation.js",
+      "notes": "Pruebas unitarias validation.test.js (7 pruebas); errores como toast en App.jsx; contadores de caracteres en TaskForm.jsx"
+    },
+    {
+      "id": "FR10",
+      "name": "localStorage Persistence and Synchronization",
+      "status": "OK",
+      "target": "projects/todo-app/src/shared/utils/localStorage.js",
+      "notes": "Pruebas unitarias localStorage.test.js (8) e integracion localStorage-integration.test.jsx (6): clave todos-app-data, cuota, JSON invalido, almacenamiento no disponible"
+    },
+    {
+      "id": "NFR1",
+      "name": "Performance — Page Load Time",
+      "status": "GAP",
+      "notes": "Tamano de build verificado: JS 231.01 kB (72.32 kB gzip) y CSS 4.22 kB (1.42 kB gzip). El tiempo de carga y FCP en red 4G no se midio (sin herramienta de rendimiento en este stage)"
+    },
+    {
+      "id": "NFR2",
+      "name": "Accessibility — WCAG 2.1 AA Compliance",
+      "status": "GAP",
+      "notes": "Implementado: etiquetas aria, aria-invalid, aria-pressed, :focus-visible, botones de 44px. No verificado: contraste 4.5:1 en ambos temas y recorrido de teclado completo en navegador"
+    },
+    {
+      "id": "NFR3",
+      "name": "Browser Compatibility",
+      "status": "GAP",
+      "notes": "Build con Vite 8 (ES2020+). No se probo en Chrome, Firefox, Safari ni Edge"
+    },
+    {
+      "id": "NFR4",
+      "name": "Code Quality and Standards",
+      "status": "OK",
+      "target": "projects/todo-app/src/shared/hooks/useTodos.js",
+      "notes": "Componentes funcionales y hooks; reglas react-hooks activas en eslint.config.js; useTodos como hook de gestion de tareas"
+    },
+    {
+      "id": "NFR5",
+      "name": "Code Style and Linting",
+      "status": "PARTIAL",
+      "target": "projects/todo-app/eslint.config.js",
+      "notes": "ESLint (react, react-hooks), Prettier (.prettierrc) y oxlint (scripts/oxlint-src.mjs, que ahora revisa los archivos de src/) pasan en ejecucion local. Pendiente: hook pre-commit (husky) y CI, no configurados en este stage"
+    },
+    {
+      "id": "NFR6",
+      "name": "Testing Coverage and Strategy",
+      "status": "OK",
+      "target": "projects/todo-app/vitest.config.js",
+      "notes": "Vitest + RTL + jsdom (en lugar de Jest, ver desviaciones). 34 pruebas: 10 BDD, 18 unitarias, 6 integracion. Cobertura de lineas 90.47%, umbral 40%"
+    },
+    {
+      "id": "NFR7",
+      "name": "Responsive Image Handling (Optional)",
+      "status": "N/A",
+      "target": "projects/todo-app/src/App.jsx",
+      "notes": "La aplicacion no usa imagenes; los iconos son texto o SVG en linea (no requerido para POC)"
+    },
+    {
+      "id": "NFR8",
+      "name": "Data Validation on Load",
+      "status": "OK",
+      "target": "projects/todo-app/src/shared/utils/localStorage.js",
+      "notes": "Valida id y title; omite registros invalidos con aviso (prueba de integracion); JSON corrupto muestra toast y boton Clear saved data (flujo de limpieza sin prueba automatizada)"
+    },
+    {
+      "id": "NFR9",
+      "name": "No Console Errors",
+      "status": "GAP",
+      "notes": "No se verifico la consola del navegador. Las pruebas no afirman ausencia de warnings de React. Unico console.error en useTheme.js (solo si falla la escritura de la preferencia)"
+    },
+    {
+      "id": "NFR10",
+      "name": "State Management",
+      "status": "OK",
+      "target": "projects/todo-app/src/shared/hooks/useTodos.js",
+      "notes": "Fuente unica de verdad con useState; actualizaciones inmutables; sin bibliotecas de estado"
+    }
+  ]
+}

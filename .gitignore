@@ -83,4 +83,10 @@ aidlc/diagnostics/
 # which was proven to corrupt the multi-line audit blocks) ·
 # aidlc/spaces/*/intents/*/<phase>/<stage>/*.md (artifacts + diary).
 .claude/settings.local.json
+
+# Projects folder — holds independent project repos (cloned separately)
+# Each project manages its own git lifecycle independently
+projects/*
+!projects/.gitkeep
+
 # END AI-DLC:gitignore

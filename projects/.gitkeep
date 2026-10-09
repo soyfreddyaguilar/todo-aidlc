@@ -1,0 +1,2 @@
+# This file keeps the projects folder in git even when empty
+# Independent project repos are cloned into this folder

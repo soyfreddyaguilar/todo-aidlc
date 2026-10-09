@@ -1,312 +1,63 @@
-# Build and Test Summary — TODO App
-
-**Stage:** Build and Test (Construction Phase)
-**Date:** 2026-10-09
-**Scope:** spec-review
-**Test Strategy:** Standard
-**Expected Outcome:** All tests pass, coverage ≥ 40%, build succeeds
-
----
-
-## Build Status
-
-### Prerequisites
-
-- ✅ Node.js 18+ available
-- ✅ npm 9+ available
-- ⏳ Application source code: Awaiting code-generation completion
-
-### Build Steps
-
-1. **Dependency Installation:** `npm install`
-   - Status: Pending (awaiting source code)
-   - Expected: All dependencies resolved, package-lock.json updated
-
-2. **Linting:** `npm run lint`
-   - Status: Pending
-   - Expected: 0 errors, 0 warnings
-   - Config: ESLint with React plugin, react-hooks enforcement
-
-3. **Type Checking:** `npm run type-check`
-   - Status: Pending
-   - Expected: 0 type errors (if TypeScript enabled)
-
-4. **Production Build:** `npm run build`
-   - Status: Pending
-   - Expected: dist/ directory created with minified assets
-   - Bundle size target: < 100 KB gzipped
-
----
-
-## Test Type Inventory
-
-This build-and-test execution generates test instructions for the following test types:
-
-### Unit Tests (19 tests)
-- **Methodology:** Synchronous validation and utility testing
-- **Framework:** Vitest + React Testing Library
-- **Location:** `src/shared/utils/__tests__/*.test.js`
-- **Coverage:** Utilities, validation, components (isolated)
-- **Expected Pass Rate:** 100% (19/19)
-
-**Breakdown:**
-- Input validation (8 tests): `src/shared/utils/__tests__/validation.test.js`
-- localStorage operations (8 tests): `src/shared/utils/__tests__/localStorage.test.js`
-- Task ID generation (3 tests): `src/shared/utils/__tests__/taskId.test.js`
-
-### BDD Feature Scenarios (10 tests)
-- **Methodology:** Acceptance-criterion-driven via Gherkin-style Given/When/Then
-- **Framework:** Vitest + React Testing Library
-- **Location:** `src/features/tasks/__tests__/tasks.feature.test.js`
-- **Coverage:** User-facing workflows for all 10 acceptance criteria
-- **Expected Pass Rate:** 100% (10/10)
-
-**Scenarios:**
-1. Create task with title and description
-2. Form resets after creation
-3. List tasks on app startup
-4. Show empty state
-5. Toggle task completion
-6. Filter tasks by status
-7. Delete task
-8. Edit task inline
-9. Responsive layout on mobile
-10. Dark mode toggle
-
-### Integration Tests (5 tests)
-- **Methodology:** Cross-unit workflows and persistence
-- **Framework:** Vitest + React Testing Library
-- **Location:** `src/features/tasks/__tests__/localStorage-integration.test.js`
-- **Coverage:** Create/list/edit/delete workflows, error handling
-- **Expected Pass Rate:** 100% (5/5)
-
-**Tests:**
-1. Create → List → Verify persistence
-2. Edit → Verify localStorage sync
-3. Delete → Verify removal from storage
-4. Quota exceeded → Verify error handling
-5. Data validation on load → Verify schema checking
-
-### Performance Tests (6 scenarios)
-- **Tools:** Lighthouse, Chrome DevTools, manual profiling
-- **Location:** Manual execution + performance-test-instructions.md
-- **Coverage:** FCP, TTI, bundle size, memory, CPU, sustained load
-- **Status:** Manual verification (not automated in CI yet)
-
-### Security Tests (13+ scenarios)
-- **Tools:** Unit tests + manual code review + browser console testing
-- **Location:** security-test-instructions.md + validation.test.js
-- **Coverage:** Input validation, data integrity, error handling, code practices
-- **Status:** Automated (unit tests) + manual review
-
----
-
-## Quality Targets
-
-| Target | ID | Category | Source | Expected | Check/Instruction File | Owning Stage |
-|--------|----|---------|----|----------|------------------------|--------------|
-| Line Coverage | COV-1 | Testing | Org Default (spec-review scope) | ≥ 40% | test:coverage report | build-and-test |
-| BDD Scenario Pass Rate | TEST-1 | Testing | unit-test-instructions.md | 10/10 (100%) | tasks.feature.test.js | build-and-test |
-| Unit Test Pass Rate | TEST-2 | Testing | unit-test-instructions.md | 19/19 (100%) | utils/**/*.test.js | build-and-test |
-| Integration Test Pass Rate | TEST-3 | Testing | integration-test-instructions.md | 5/5 (100%) | localStorage-integration.test.js | build-and-test |
-| ESLint Pass | LINT-1 | Code Quality | team.md (code-style) | 0 errors, 0 warnings | npm run lint | build-and-test |
-| Build Success | BUILD-1 | Build | build-instructions.md | dist/ created | npm run build | build-and-test |
-| Bundle Size | PERF-1 | Performance | performance-requirements.md (NFR1.3) | < 100 KB gzipped | npm run build output | build-and-test + performance-validation |
-| FCP (First Contentful Paint) | PERF-2 | Performance | performance-requirements.md (NFR1.1) | < 1.5s on 4G | Lighthouse audit | performance-validation |
-| TTI (Time to Interactive) | PERF-3 | Performance | performance-requirements.md (NFR1.2) | < 2s on 4G | Lighthouse audit | performance-validation |
-| Runtime Memory | PERF-4 | Performance | performance-requirements.md (NFR1.3) | < 50 MB idle | DevTools Memory profiling | performance-validation |
-| CPU during CRUD | PERF-5 | Performance | performance-requirements.md (NFR1.3) | < 10% average | DevTools Performance profiling | performance-validation |
-| Sustained Performance (100+ tasks) | PERF-6 | Performance | performance-requirements.md (NFR1.4) | < 100ms per operation | Load test | performance-validation |
-| Input Validation | SEC-1 | Security | security-requirements.md (NFR4.1) | All inputs validated | validation.test.js | build-and-test |
-| Data Integrity (schema) | SEC-2 | Security | security-requirements.md (NFR4.2) | Corrupted data handled | localStorage-integration.test.js | build-and-test |
-| Error Handling | SEC-3 | Security | security-requirements.md (NFR4.3) | Errors caught, user notified | integration tests | build-and-test |
-| Code Security Practices | SEC-4 | Security | security-requirements.md (NFR4.4) | No secrets, no XSS, no eval | Code review + unit tests | build-and-test |
-| XSS Prevention | ACC-1 | Accessibility/Security | security-test-instructions.md | HTML escaped, no injection | Manual testing + unit tests | build-and-test |
-
----
-
-## Target Verification Matrix
-
-### Status Legend
-- **Pending:** Target identified, awaiting test execution
-- **Met:** Target validated and passes acceptance criteria
-- **Not Met:** Target tested but fails acceptance criteria
-- **Unverified:** Target deferred to later stage (e.g., performance-validation)
-- **N/A:** Not applicable for this scope/skeleton
-
-| Target ID | Source | Expected Value | Actual | Evidence | Owning Stage | Verdict |
-|-----------|--------|-----------------|--------|----------|--------------|---------|
-| COV-1 | Org default (spec-review) | ≥ 40% line coverage | Pending | (npm run test:coverage) | build-and-test | Pending |
-| TEST-1 | unit-test-instructions.md | 10/10 BDD scenarios pass | Pending | (tasks.feature.test.js output) | build-and-test | Pending |
-| TEST-2 | unit-test-instructions.md | 19/19 unit tests pass | Pending | (npm run test output) | build-and-test | Pending |
-| TEST-3 | integration-test-instructions.md | 5/5 integration tests pass | Pending | (localStorage-integration.test.js output) | build-and-test | Pending |
-| LINT-1 | team.md (Code Style) | 0 ESLint errors | Pending | (npm run lint output) | build-and-test | Pending |
-| BUILD-1 | build-instructions.md | dist/ created, no build errors | Pending | (npm run build output) | build-and-test | Pending |
-| PERF-1 | NFR1.3 | < 100 KB gzipped | Pending | (build output) | build-and-test | Pending |
-| PERF-2 | NFR1.1 | FCP < 1.5s on 4G | Unverified | (Lighthouse, deferred) | performance-validation | Unverified |
-| PERF-3 | NFR1.2 | TTI < 2s on 4G | Unverified | (Lighthouse, deferred) | performance-validation | Unverified |
-| PERF-4 | NFR1.3 | Memory < 50 MB idle | Unverified | (DevTools, deferred) | performance-validation | Unverified |
-| PERF-5 | NFR1.3 | CPU < 10% during CRUD | Unverified | (DevTools, deferred) | performance-validation | Unverified |
-| PERF-6 | NFR1.4 | Sustained < 100ms (100+ tasks) | Unverified | (Load test, deferred) | performance-validation | Unverified |
-| SEC-1 | NFR4.1 | All inputs validated | Pending | (validation.test.js) | build-and-test | Pending |
-| SEC-2 | NFR4.2 | Corrupted data handled | Pending | (localStorage-integration.test.js) | build-and-test | Pending |
-| SEC-3 | NFR4.3 | Errors caught, user notified | Pending | (integration tests) | build-and-test | Pending |
-| SEC-4 | NFR4.4 | No secrets, no XSS, no unsafe patterns | Pending | (Code review + tests) | build-and-test | Pending |
-| ACC-1 | Security & Accessibility | XSS prevented, HTML escaped | Pending | (Manual + unit tests) | build-and-test | Pending |
-
----
-
-## Readiness Assessment
-
-### Build Readiness: ⏳ Pending
-- Prerequisites: ✅ Available (Node.js, npm)
-- Source Code: ⏳ Awaiting code-generation
-- Dependencies: ⏳ Not yet installed (awaiting source)
-- Build Configuration: ✅ Ready (build instructions documented)
-
-**Status:** Ready to build once source code is generated.
-
-### Test Readiness: ⏳ Pending
-- Test Framework: ✅ Configured (Vitest + React Testing Library)
-- Test Instructions: ✅ Generated (unit, integration, BDD, performance, security)
-- Test Data: ✅ Defined (sample tasks, fixtures)
-- Coverage Target: ✅ Set (40% line coverage)
-
-**Status:** Ready to run tests once source code is generated.
-
-### Deployment Readiness: ⏳ Pending
-- All tests passing: ⏳ Awaiting execution
-- Coverage ≥ 40%: ⏳ Awaiting verification
-- No linting errors: ⏳ Awaiting linting
-- Bundle size < 100 KB: ⏳ Awaiting build
-
-**Status:** **NOT READY** until all quality targets met.
-
----
-
-## Known Limitations & Outstanding Items
-
-1. **Source Code Generation**
-   - Status: Code-generation stage has completed planning and test instructions, but actual source files (App.jsx, components, utilities) not yet generated
-   - Impact: Cannot execute build/tests until source code available
-   - Resolution: Code-generation stage must output source files to workspace root
-
-2. **Performance Tests (Deferred)**
-   - Status: FCP, TTI, memory, CPU profiling deferred to performance-validation stage
-   - Impact: 6 performance targets marked `Unverified`
-   - Rationale: Requires production environment or deployed instance
-
-3. **BDD Test Framework Integration**
-   - Status: Instructions provided; actual test file may need Gherkin-to-JS transpilation
-   - Rationale: Using Vitest with Given/When/Then comments, not full Gherkin parser
-   - Alternative: Use Cucumber.js if strict Gherkin format required
-
----
-
-## Test Execution Plan
-
-### Phase 1: Build (Awaiting Source Code)
-```bash
-npm install              # Install dependencies
-npm run lint             # Check linting (0 errors required)
-npm run type-check       # Check TypeScript (0 errors, if .ts files present)
-npm run build            # Create production bundle
-```
-
-**Success Criteria:**
-- ✅ npm install succeeds
-- ✅ ESLint: 0 errors
-- ✅ Build completes
-- ✅ dist/ directory created
-- ✅ Bundle size < 100 KB gzipped
-
-### Phase 2: Unit & BDD Tests
-```bash
-npm run test             # Run all tests
-npm run test:coverage    # Generate coverage report
-```
-
-**Success Criteria:**
-- ✅ 34 tests pass (19 unit + 10 BDD + 5 integration)
-- ✅ Coverage ≥ 40%
-- ✅ No skipped tests
-
-### Phase 3: Manual Performance Tests
-```bash
-npm run preview          # Start production preview server
-# Open http://localhost:4173 in Chrome with Lighthouse
-# Run manual performance profiling per performance-test-instructions.md
-```
-
-**Success Criteria:**
-- ✅ FCP < 1.5s (or Unverified if deferred)
-- ✅ TTI < 2s (or Unverified if deferred)
-- ✅ No console errors
-
-### Phase 4: Security Review
-```bash
-# Manual code review per security-test-instructions.md
-# Verify no hardcoded secrets, XSS, eval, etc.
-npm run test -- src/shared/utils/__tests__/validation.test.js  # Input validation tests
-```
-
-**Success Criteria:**
-- ✅ No secrets in code
-- ✅ No eval/Function
-- ✅ XSS prevented
-- ✅ Validation tests pass
-
----
-
-## Cross-Unit Traceability Readiness
-
-The cross-unit traceability matrix (to be generated in Step 10) will verify that:
-- Every FR (FR1-FR10) is mapped to at least one test or component
-- Every NFR (NFR1-6) is mapped to requirements and tests
-- Every test scenario is traced back to an acceptance criterion or requirement
-
-**Traceability File:** `cross-unit-traceability.md` (generated after test execution)
-
----
-
-## Completion Handoff
-
-Once all quality targets are **Met** or **Unverified (by design)**:
-
-1. ✅ Build successful (dist/ created, < 100 KB gzipped)
-2. ✅ All unit/BDD/integration tests passing (34/34)
-3. ✅ Coverage ≥ 40%
-4. ✅ ESLint clean
-5. ✅ Security & input validation tests passing
-6. ✅ Cross-unit traceability verified
-
-**Handoff to:** CI Pipeline stage (3.7) for automated testing and deployment
-
----
-
-## Status Summary
-
-| Aspect | Status | Notes |
-|--------|--------|-------|
-| Test Instructions Generated | ✅ Complete | 4 instruction files: build, integration, performance, security |
-| Build Instructions | ✅ Complete | Documented prerequisites, commands, verification steps |
-| Quality Targets Identified | ✅ Complete | 17 targets tracked in verification matrix |
-| Source Code Available | ⏳ Pending | Awaiting code-generation output |
-| Build Execution | ⏳ Pending | Ready once source code available |
-| Tests Execution | ⏳ Pending | Ready once source code available |
-| Performance Validation | ⏳ Pending | Deferred to performance-validation stage |
-| Deployment Readiness | ❌ Not Ready | Awaiting build and test execution |
-
----
-
-## Next Steps
-
-1. **Code Generation** completes and outputs source files to workspace root
-2. **Build and Test** executes (this stage, Step 9):
-   - Run build commands
-   - Execute unit/BDD/integration tests
-   - Record results
-   - Update Target Verification Matrix
-3. **Cross-Unit Traceability** validated (Step 10)
-4. **Approval Gate** presented to human
+# Resumen de Build and Test — TODO App
 
+## Estado general
+
+- **Build:** correcto (`npm run build`).
+- **Pruebas:** 34 de 34 pasan (5 archivos).
+- **Cobertura:** cumple los umbrales (líneas 90.47%).
+- **Lint y formato:** correctos (oxlint, ESLint y Prettier).
+- **Etapa:** **no supera** la regla de fallo del protocolo, porque hay objetivos medibles sin verificar o no cumplidos (ver matriz). Requiere decisión humana.
+
+## Prerrequisitos
+
+Node.js 20+, `npm install` en `projects/todo-app`. Sin backend ni servicios externos.
+
+## Inventario de tipos de prueba (estrategia standard)
+
+- Pruebas unitarias (Code Generation): 18 (validación 7, localStorage 8, taskId 3).
+- Escenarios BDD: 10 (`tasks.feature.test.jsx`).
+- Pruebas de integración: 6 (`localStorage-integration.test.jsx`).
+- Pruebas de rendimiento y seguridad: no aplican con esta estrategia. Los archivos `performance-test-instructions.md` y `security-test-instructions.md` son de una sesión anterior y quedan sin uso; se archivarán en la siguiente pasada.
+
+## Expectativas de cobertura por unidad
+
+Sin unidades (alcance spec-review). Cobertura medida en el proyecto completo: líneas 90.47%, sentencias 87.9%, funciones 86.9%, ramas 73.79%.
+
+## Matriz de verificación de objetivos
+
+| Target ID | Fuente | Esperado | Actual | Evidencia | Etapa responsable | Veredicto |
+|---|---|---|---|---|---|---|
+| T-BUILD-01 | build-instructions.md | Build sin errores | Correcto, 231.01 kB JS | `npm run build` | build-and-test | Met |
+| T-TEST-01 | unit-test-instructions.md | Todas las pruebas pasan | 34/34 | `npm run test` | build-and-test | Met |
+| T-COV-01 | Piso de cobertura 40% líneas | ≥ 40% | 90.47% | `npm run test:coverage` | build-and-test | Met |
+| T-COV-02 | Umbrales de vitest.config.js | fn 40 / ramas 30 / sent 40 | fn 86.9 / ramas 73.79 / sent 87.9 | `npm run test:coverage` | build-and-test | Met |
+| T-NFR1-SIZE | NFR1 / plan (< 100 KB gzip) | < 100 KB gzip | 72.32 kB gzip | `npm run build` | build-and-test | Met |
+| T-NFR5-LINT | NFR5 (lint sin errores) | 0 errores | 0 (oxlint revisa 21 archivos) | `npm run lint`, `npm run lint:eslint` | build-and-test | Met |
+| T-NFR5-FMT | NFR5 (Prettier) | Formato correcto | Correcto | `npm run format:check` | build-and-test | Met |
+| T-NFR2-CONTRAST | NFR2 (4.5:1 texto, ambos temas) | ≥ 4.5 | Mínimo 5.55 en tokens (ver nota) | Cálculo WCAG sobre `src/index.css` | build-and-test | Met |
+| T-NFR1-LOAD | NFR1 (carga < 2 s en 4G) | Tiempo medido | No medido | Ninguna | performance-validation (programada en el alcance) | Unverified |
+| T-NFR2-KEYBOARD | NFR2 (recorrido de teclado) | Recorrido completo | No realizado | Ninguna | Ninguna programada | Unverified |
+| T-NFR3-BROWSERS | NFR3 (Chrome, Firefox, Safari, Edge) | Pruebas en cada navegador | No realizado | Ninguna | Ninguna programada | Unverified |
+| T-NFR9-CONSOLE | NFR9 (consola limpia) | Sin errores ni warnings | No verificado | Ninguna | Ninguna programada | Unverified |
+| T-FR7-320 | FR7 (320px sin scroll horizontal) | Prueba de viewport | Solo validación estática de CSS | `src/App.css` | Ninguna programada | Unverified |
+| T-NFR6-MAP | NFR6 (10 escenarios 1:1 con FR1-FR10) | 10 escenarios, uno por FR | 10 escenarios que no cubren FR9 ni FR10 | `tasks.feature.test.jsx` | build-and-test | Not Met |
+
+**Nota sobre T-NFR2-CONTRAST:** el cálculo usa los tokens de color, no pixeles renderizados en un navegador. Pares más débiles: éxito sobre fondo de éxito en tema claro (5.55:1) y texto sobre superficie en tema oscuro (10.71:1); todos los pares de texto superan 4.5:1.
+
+## Preparación de listo / no listo
+
+- **Build-ready:** sí.
+- **Test-ready:** sí, con la brecha de NFR6 y los objetivos no verificados.
+- **Deployment-ready:** no. Sin CI ni husky (NFR5 parcial), sin verificación en navegador.
+
+## Limitaciones conocidas
+
+- FR7 (responsive) sin prueba de viewport real.
+- FR9 y FR10 cubiertos por pruebas unitarias e de integración, no por escenarios BDD propios (desviación declarada en code-summary).
+- NFR9: el propio código tiene un `console.error` solo si falla la escritura de la preferencia de tema.
+- NFR3: sin pruebas multi-navegador.
+- Las instrucciones de rendimiento y seguridad son de una sesión anterior y no aplican a esta estrategia.
+
+## Decisión pendiente
+
+La regla de fallo del protocolo se cumple (objetivos Unverified y uno Not Met). Opciones ante el gate de Build and Test: **Accept failure** (registrar y avanzar), **Abort** (detener y reanudar después) o **Retry with fix** si existe una corrección identificable (por ejemplo, agregar escenarios para FR9 y FR10 y una prueba de consola para NFR9, con impacto estimado de esfuerzo bajo y sin costo económico). La elección es del humano.

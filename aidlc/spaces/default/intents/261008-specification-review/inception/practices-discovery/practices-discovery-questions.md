@@ -20,7 +20,7 @@ C. Git Flow with develop + main, traditional merge commits
 D. Other (specify)
 X. Unclear — needs discussion
 
-[Answer]:
+[Answer]: A
 
 ---
 
@@ -38,7 +38,7 @@ C. Build skeleton only if time permits; prioritize full AC validation otherwise
 D. Other
 X. Unclear
 
-[Answer]:
+[Answer]: A
 
 ---
 
@@ -62,7 +62,7 @@ C. Maintain original test-after + 70% coverage + CI enforcement
 D. Other approach
 X. Unclear
 
-[Answer]:
+[Answer]: A
 
 ---
 
@@ -85,7 +85,7 @@ C. Modify strategy (specify which refinements to include/defer)
 D. Other
 X. Unclear
 
-[Answer]:
+[Answer]: B
 
 ---
 
@@ -108,7 +108,7 @@ C. Modify approach (specify which refinements to include/defer)
 D. Other
 X. Unclear
 
-[Answer]:
+[Answer]: A
 
 ---
 

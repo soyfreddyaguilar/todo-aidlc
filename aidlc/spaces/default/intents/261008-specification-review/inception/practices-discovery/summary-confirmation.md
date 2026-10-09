@@ -10,4 +10,4 @@ The team has affirmed five core practice areas:
 
 Learnings (7 entries) have been recorded to project memory covering interpretations, deviations, and tradeoffs.
 
-[Answer]:
+[Answer]: Looks correct
